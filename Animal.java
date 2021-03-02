@@ -10,7 +10,7 @@ import java.util.List;
  * @version 2016.02.29 (2)
  */
 
-// Example of how to get a value out of an enum: AnimalStats.EAGLE.getBreedingAge() --->  returns 5
+// Example of how to get a value out of an enum: AnimalStats.EAGLE.getBreedingAge() -->  returns 5
 public abstract class Animal extends Entity
 {
 
