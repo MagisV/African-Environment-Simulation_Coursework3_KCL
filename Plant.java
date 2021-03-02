@@ -4,7 +4,7 @@ public abstract class Plant extends Entity {
     enum PlantStats {
 
         GRASS(3, 0.3, 8, 0, 6, 21, 15),
-        TREE(20, 0.02, 3, 1, 6, 21, 50);
+        TREE(20, 0.03, 2, 1, 6, 21, 50);
 
         private int breedingAge;
         private double breedingProbability;

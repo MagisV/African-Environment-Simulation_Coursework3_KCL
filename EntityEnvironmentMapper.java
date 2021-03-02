@@ -1,21 +1,31 @@
 import java.util.HashMap;
 
+/**
+ * Class EntityEnvironmentMapper - Map
+ */
 public class EntityEnvironmentMapper {
 
     private HashMap<Class, String> entityEnvironmentMap;
 
+
+    /**
+     *
+     */
     public EntityEnvironmentMapper()
     {
         entityEnvironmentMap = new HashMap<>();
         initializeMap();
     }
 
-    //ENUM?
+    /**
+     *
+     */
     private void initializeMap()
     {
         entityEnvironmentMap.put(Eagle.class, "Desert");
+
         entityEnvironmentMap.put(Tree.class, "Forest");
-        //entityEnvironmentMap.put(Snake.class, "Forest");
+        entityEnvironmentMap.put(Snake.class, "Forest");
         entityEnvironmentMap.put(Gazelle.class, "Savanna");
         entityEnvironmentMap.put(Lion.class, "Savanna");
     }

@@ -4,17 +4,14 @@ import java.util.*;
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
+ * @author David J. Barnes and Michael Kölling, edited by Valentin Magis and Barnabas Szalai
+ * @version 2021-03-02
  */
-public class Field
-{
-
+public class Field {
 
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
-    
-    
+
     // The depth and width of the field.
     private int depth, width, height;
     // Storage for the animals.
@@ -43,10 +40,13 @@ public class Field
         savannaEnvironment = new Environment("Savanna", 0, width/3);
         forestEnvironment = new Environment("Forest", width/3+1, (width/3)*2);
         desertEnvironment = new Environment("Desert", (width/3)*2+1, width-1);
-
-
     }
 
+    /**
+     * Returns the name of the environment of the location.
+     * @param location The location the environment is requested of.
+     * @return The name of the environment.
+     */
     public String getCurrentEnvironment(Location location) {
         if(location.getCol() <= savannaEnvironment.getEndCol()) {
             return "Savanna";
@@ -57,16 +57,20 @@ public class Field
         }
     }
 
+    /**
+     * A getter method that returns the savanna environment object
+     * @return the savanna environment
+     */
     public Environment getSavannaEnvironment() {
         return savannaEnvironment;
     }
 
+    /**
+     * A getter method that returns the forest Environment object
+     * @return the forest environment
+     */
     public Environment getForestEnvironment() {
         return forestEnvironment;
-    }
-
-    public Environment getDesertEnvironment() {
-        return desertEnvironment;
     }
     
     /**
@@ -84,7 +88,7 @@ public class Field
     }
 
     /**
-     * Empty the field.
+     * Pushes the current field into the stack which holds the previously visited fields
      */
     public void savePrev()
     {
@@ -99,6 +103,10 @@ public class Field
         previousFields.push(temp);
     }
 
+    /**
+     * Pushes the current field into the stack that holds the fields of the fields that have been previously visited,
+     * but are after the current step
+     */
     public void saveNext()
     {
         Entity[][][] temp = new Entity[depth][width][height];
@@ -113,7 +121,8 @@ public class Field
     }
 
     /**
-     * Empty the field.
+     * Pops a field from the stack that holds the previous fields and sets it as the current field. It also saves the
+     * current field into the next fields stack
      */
     public void loadPrevious()
     {
@@ -128,6 +137,10 @@ public class Field
         }
     }
 
+    /**
+     * Pops a field from the stack that loads the next fields that have been previously visited, but are further from
+     * the current step. It also saves the current field into the stack that holds the previous fields.
+     */
     public void loadNext() {
         Entity[][][] temp = nextFields.pop();
         savePrev();
@@ -143,9 +156,15 @@ public class Field
         }
     }
 
+    /**
+     * Checks whether the stack of the next fields is empty. It is empty when the current step is at the maximum
+     * it has been since compiling the program.
+     * @return If the stack of the next field is empty.
+     */
     public boolean isNext() {
         return !(nextFields.isEmpty());
     }
+
     /**
      * Clear the given location.
      * @param location The location to clear.
@@ -153,20 +172,6 @@ public class Field
     public void clear(Location location)
     {
         field[location.getRow()][location.getCol()][location.getLevel()] = null;
-    }
-    
-    /**
-     * Place an entity at the given location.
-     * If there is already an animal at the location it will
-     * be lost.
-     * @param entity The animal to be placed.
-     * @param row Row coordinate of the location.
-     * @param col Column coordinate of the location.
-     * @param level Level of the location
-     */
-    public void place(Entity entity, int row, int col, int level)
-    {
-        place(entity, new Location(row, col, level));
     }
     
     /**
@@ -214,26 +219,7 @@ public class Field
         return field[location.getRow()][location.getCol()][level];
     }
 
-
     /**
-     * Returns a list of all entities at the same row and column
-     * @param row The desired row
-     * @param col The desired column
-     * @return The list of entities with the same row and column at all levels
-     */
-    public ArrayList<Entity> getObjectsAt(int row, int col)
-    {
-        ArrayList<Entity> entities = new ArrayList<>();
-        for (int i = 0; i < getHeight(); i++)
-        {
-            entities.add(getEntityAt(row, col, i));
-        }
-        return entities;
-    }
-
-    /**
-     * //MAYBE THIS SHOULD BE IN SIMULATOR VIEW BECAUSE IT IS SOMETHING WITH PAINTING
-     *
      * Return the object with the highest importance at all levels of the same row and column coordinates.
      * E.g. used to draw entities in SimulatorView
      *
@@ -241,7 +227,7 @@ public class Field
      * @param col The desired column
      * @return The entity with the highest painting hierarchy
      */
-    public Object getDrawingObjectAt(int row, int col, Field field)
+    public Object getObjectOnTop(int row, int col, Field field)
     {
 
         if (this.getEntityAt(row, col, 3) != null) //Air animals are at the top and therefore painted first
@@ -323,7 +309,6 @@ public class Field
         // The list of locations to be returned.
         List<Location> locations = new LinkedList<>();
         if(location != null) {
-            //for (int i = 0; i <= radius; i++) {
                 int row = location.getRow();
                 int col = location.getCol();
                 int level;
@@ -344,8 +329,7 @@ public class Field
                 }
             //}
 
-            // Shuffle the list. Several other methods rely on the list
-            // being in a random order.
+            // Shuffle the list. Several other methods rely on the list being in a random order.
             Collections.shuffle(locations, rand);
         }
         return locations;
@@ -369,8 +353,9 @@ public class Field
 
     /**
      * Returns if a given location is free depending on its level.
-     * @param location
-     * @return
+     * This is the core logic of how entities can move/ where they can place offspring.
+     * @param location The location checked for being free.
+     * @return If the location is free.
      */
     public boolean isFree(Location location)
     {
@@ -392,12 +377,11 @@ public class Field
         return false;
     }
 
-
     /**
      * Returns a list of free locations in the given radius.
-     * @param location
-     * @param radius
-     * @return
+     * @param location The location the is being looked from.
+     * @param radius The radius in which free locations are searched for
+     * @return A list of all free locations within the given radius.
      */
     public List<Location> getFreeNearbyLocations(Location location, int radius) {
         List<Location> free = new LinkedList<>();
@@ -429,12 +413,12 @@ public class Field
         }
     }
 
-
     /**
      * Returns a list of locations in the given radius.
-     * @param location
-     * @param radius
-     * @return
+     * @param location the location from which the nearby locations are checked
+     * @param radius the radius of a circle from the original location. Every location inside the circle counts as a
+     * nearby location.
+     * @return a list of location that are near the entered location
      */
     public List<Location> nearbyLocations(Location location, int radius) {
         assert location != null : "Null location passed to nearbyLocations";
@@ -461,33 +445,23 @@ public class Field
         return locations;
     }
 
-
-
+    /**
+     * Get one free location.
+     * @param location The location that is being looked from.
+     * @param radius The radius in which to look for a free location
+     * @return A randomly selected free location within the radius from the given location.
+     */
     public Location freeNearbyLocation(Location location, int radius)
     {
-        // The available free ones.
+        // The available free locations.
         List<Location> free = getFreeNearbyLocations(location, radius);
         if(free.size() > 0) {
-            return free.get(0); // Change! Set the location to a nearby location based on some values.
+            return free.get(0);
         }
         else {
             return null;
         }
     }
-
-    /**
-     * Gives the location at the same row and col as the given location and a different level
-     * @param location The location (only row and col are relevant)
-     * @param level The new level
-     * @return The new location at the specified level.
-     */
-    /*
-    public Location getLocationAtLevel(Location location, int level)
-    {
-        return getEntityAt(location.getRow(), location.getCol(), level).getLocation();
-    }
-
-     */
 
     /**
      * Return the depth of the field.

@@ -117,7 +117,7 @@ public class SimulatorView extends JFrame
 
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                Object entity = field.getDrawingObjectAt(row, col, field);
+                Object entity = field.getObjectOnTop(row, col, field);
                 if(entity != null) {
                     //stats.incrementCount(entity.getClass()); //not needed anymore. Made generatecounts in fieldstats public and generate them below,
                     // This method sucks tho because stats are newly calculated every step.

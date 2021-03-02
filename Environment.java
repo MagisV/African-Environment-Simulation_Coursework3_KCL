@@ -1,33 +1,43 @@
+/**
+ * Class Environment - A class that keeps track of the borders of each environment.
+ */
+
 public class Environment{
 
     private String name;
     private int startCol;
     private int endCol;
 
-    private int totalMutation;
 
-
-
+    /**
+     * A constructor method that initializes the instance variables of the class.
+     * @param name the name of the environment
+     * @param startCol the start width position of the environment
+     * @param endCol the end width position of the environment
+     */
     public Environment(String name, int startCol, int endCol) {
         this.name = name;
         this.startCol = startCol;
         this.endCol = endCol;
-        totalMutation = 0;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
+    /**
+     * Returns the left border of the environment
+     * @return the start col
+     */
     public int getStartCol() {
         return startCol;
     }
 
+    /**
+     * Returns the right border of the environment
+     * @return the end col
+     */
     public int getEndCol() {
         return endCol;
-    }
-
-    public void addMutation(int mutation) {
-        totalMutation+=mutation;
     }
 }

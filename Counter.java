@@ -4,7 +4,7 @@ import java.awt.Color;
  * Provide a counter for a participant in the simulation.
  * This includes an identifying string and a count of how
  * many participants of this type currently exist within 
- * the simulation.
+ * the simulation. It also stores a count of entities for each environment of the field.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
@@ -57,23 +57,9 @@ public class Counter
         }
     }
 
-    public int getBeachCount()
-    {
-        return savannaCount;
-    }
-
-    public int getForestCount()
-    {
-        return forestCount;
-    }
-
-    public int getDesertCount()
-    {
-        return desertCount;
-    }
-
     /**
-     * Increment the current count by one.
+     * Increment the current count by one for both the total and the current environment
+     * @param environment the environment whose population is to be incremented.
      */
     public void increment(String environment)
     {
@@ -85,20 +71,6 @@ public class Counter
             savannaCount++;
         }
         count++;
-    }
-
-    /**
-     * Decrement the current count by one.
-     */
-    public void decrement(String environment) {
-        if(environment.equals("Forest")) {
-            forestCount--;
-        } else if (environment.equals("Desert")) {
-            desertCount--;
-        } else {
-            savannaCount--;
-        }
-        count--;
     }
     
     /**

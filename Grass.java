@@ -1,5 +1,12 @@
 import java.util.List;
 
+/**
+ * A grass is a plant. It is eaten by the gazelle.
+ *
+ * @author David J. Barnes and Michael Kölling, edited by Valentin Magis and Barnabas Szalai
+ * @version 2021-03-02
+ */
+
 public class Grass extends Plant {
 
 
@@ -10,6 +17,14 @@ public class Grass extends Plant {
     private final int BREEDING_AGE = PlantStats.GRASS.getBreedingAge();
     private final int TIME_ACTIVITY_START = PlantStats.GRASS.getTimeActivityStart();
     private final int TIME_ACTIVITY_END = PlantStats.GRASS.getTimeActivityEnd();
+
+    /**
+     * The constructor method of the class, which initializes its instance variables and calls the constructor of
+     * the superclass.
+     * @param randomAge a boolean whether the age should be randomly determined
+     * @param field the field to which the grass is to be placed
+     * @param location the location where the grass is to be placed
+     */
 
     public Grass(boolean randomAge, Field field, Location location)
     {
@@ -22,6 +37,11 @@ public class Grass extends Plant {
         }
     }
 
+    /**
+     * Calls the act method of the superclass. Also calls makes the grass propagate if it is alive after the act.
+     * @param newGrass
+     * @param currentTime The current time
+     */
     @Override
     public void act(List<Entity> newGrass, int currentTime) {
         super.act(newGrass, currentTime);
@@ -40,6 +60,10 @@ public class Grass extends Plant {
         foodValue = (int) Math.round(2*Math.log(age)); //log grows fast in the beginning and slower at later stages, mimics the growth of real grass.
     }
 
+    /**
+     * Returns the nutrition value that the animal receives when it eats the grass
+     * @return the food value
+     */
     public int getFoodValue()
     {
         return foodValue;

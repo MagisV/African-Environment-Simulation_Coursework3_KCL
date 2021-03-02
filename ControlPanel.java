@@ -3,17 +3,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class Control Panel - A control panel that allows for the manipulation of the simulation. It allows for stopping
+ * the simulation and running it by a specified step at a time.
+ */
 public class ControlPanel extends JFrame implements ActionListener{
 
     private static Simulator simulator;
     private static int steps;
 
 
+    /**
+     * The main method of the project. Calls the method to start the application and creates a new instance of the
+     * Simulator class.
+     * @param arg
+     */
     public static void main(String arg[]) {
         simulator = new Simulator(steps);
         startSimulation();
     }
 
+    /**
+     * Starts the initial simulator.
+     */
     public static void startSimulation() {
         simulator.runLongSimulation();
     }
@@ -33,13 +45,16 @@ public class ControlPanel extends JFrame implements ActionListener{
 
     private boolean paused;
 
+    /**
+     * The constructor methods which creates the frame, panel, buttons, labels and textfields on the control panel.
+     *
+     */
     public ControlPanel() {
 
         paused = false;
 
         JPanel panel = new JPanel();
         steps = 0;
-
 
         JFrame frame = new JFrame();
         frame.setTitle("Control Panel");
@@ -50,8 +65,6 @@ public class ControlPanel extends JFrame implements ActionListener{
         frame.add(panel);
 
         panel.setLayout(null);
-        //JLabel label = new JLabel("");
-
 
         showMapButton = new JButton("Show Environment Map");
         showMapButton.setBounds(20, 120, 200, 20);
@@ -77,12 +90,10 @@ public class ControlPanel extends JFrame implements ActionListener{
         desertDataButton.setVisible(false);
         panel.add(desertDataButton);
 
-
         pauseButton = new JButton("Switch to manual");
         pauseButton.setBounds(20, 20, 140, 20);
         pauseButton.addActionListener(this);
         panel.add(pauseButton);
-
 
         previousButton = new JButton("Previous");
         previousButton.setBounds(20, 20, 80, 20);
@@ -117,6 +128,11 @@ public class ControlPanel extends JFrame implements ActionListener{
 
     }
 
+    /**
+     * This method is called when a button is clicked on the control panel. It manipulates the simulation and the map
+     * when specific buttons are clicked.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -222,10 +238,19 @@ public class ControlPanel extends JFrame implements ActionListener{
         }
     }
 
+    /**
+     * Return if the simulation has been paused.
+     * @return If the simulation has been paused
+     */
     public boolean getPaused() {
         return paused;
     }
 
+    /**
+     * Displays a feedback message on the control panel.
+     * @param message the message that is to be displayed.
+     * @param color the preferred color of the message text
+     */
     private void displayMessage(String message, Color color) {
 
         feedbackMessage.setText(message);

@@ -2,10 +2,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * Helperclass EntityLevelMapper
- * This class specifies at what level of the map each entity type is moving at.
- *
- * APPLY THIS TO THE POPULATE METHOD
+ * Helperclass EntityLevelMapper - This class specifies at what level of the map each entity type is moving at.
  */
 public class EntityLevelMapper {
 
@@ -17,16 +14,17 @@ public class EntityLevelMapper {
     }
 
     /**
-     * Initialize the level map. This implies at what level in the map the animal moves and indirectly also at what other levels this entity ma look for food.
+     * Initialize the level map. This implies at what level in the map the animal moves and indirectly also at what other levels this entity may look for food.
+     * Levels are received from the enums in Animal and Plant.
      */
     private void initializeMap() {
-        entityLevelMap.put(Eagle.class, 3);
-        entityLevelMap.put(Frog.class, 2);
-        entityLevelMap.put(Gazelle.class, 2);
-        entityLevelMap.put(Lion.class, 2);
-        entityLevelMap.put(Snake.class, 2);
-        entityLevelMap.put(Tree.class, 1);
-        entityLevelMap.put(Grass.class, 0);
+        entityLevelMap.put(Eagle.class, Animal.AnimalStats.EAGLE.getLevel());
+        entityLevelMap.put(Frog.class, Animal.AnimalStats.FROG.getLevel());
+        entityLevelMap.put(Gazelle.class, Animal.AnimalStats.GAZELLE.getLevel());
+        entityLevelMap.put(Lion.class, Animal.AnimalStats.LION.getLevel());
+        entityLevelMap.put(Snake.class, Animal.AnimalStats.SNAKE.getLevel());
+        entityLevelMap.put(Tree.class, Plant.PlantStats.TREE.getLevel());
+        entityLevelMap.put(Grass.class, Plant.PlantStats.GRASS.getLevel());
     }
 
     /**

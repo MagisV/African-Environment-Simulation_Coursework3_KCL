@@ -1,8 +1,13 @@
 import java.util.List;
 import java.util.Random;
 
-public abstract class Entity {
 
+/**
+ * Class Entity - An entity is a living thing that is represented in the simulator. All animals and plants indirectly inherit from this class.
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
+ */
+public abstract class Entity {
 
     protected boolean alive; // Whether the entity is alive or not.
     protected Field field;   // The entity's field.
@@ -14,7 +19,7 @@ public abstract class Entity {
     protected int age; // The entities age
 
     protected static final FoodChain foodChain = new FoodChain(); // Stores the food sources of each entity, if it has any.
-    private static final EntityEnvironmentMapper entityEnvironmentMapper = new EntityEnvironmentMapper();
+    private static EntityEnvironmentMapper entityEnvironmentMapper; // A map of the preferred environments of the each entity type.
 
 
     /**
@@ -28,13 +33,14 @@ public abstract class Entity {
         alive = true;
         this.field = field;
         setLocation(location);
+        entityEnvironmentMapper = new EntityEnvironmentMapper();
     }
 
     /**
      * Make this entity act - that is: make it do
      * whatever it wants/needs to do.
-     * @param newEntities A list to receive newly born animals.
-     * @param currentTime
+     * @param newEntities A list to receive newly created entities.
+     * @param currentTime The current time
      */
     public void act(List<Entity> newEntities, int currentTime)
     {
@@ -133,18 +139,38 @@ public abstract class Entity {
 
     /**
      * Returns the maximum age of an entity.
-     * @return
+     * @return The max age of an entity
      */
     protected abstract int getMaxAge();
 
+    /**
+     * Returns the breeding probability when the entity is at the environment which is not its preferred one
+     * @return the breeding probability of the bad environment
+     */
     protected abstract double getBadEnvironmentBreedingProbability();
 
+    /**
+     * Returns the breeding probability of an entity
+     * @return the breeding probability of an entity
+     */
     protected abstract double getBreedingProbability();
 
+    /**
+     * Returns the maximum number of newborns an entity can produce
+     * @return the maximum litter size
+     */
     protected abstract int getMaxLitterSize();
 
+    /**
+     * Returns the age at which the entity can start generating offsprings
+     * @return the breeding age of the entity
+     */
     protected abstract int getBreedingAge();
 
+    /**
+     * Returns the time when the animal starts to act
+     * @return the start of the activity time
+     */
     protected abstract int getTimeActivityStart();
 
     protected abstract int getTimeActivityEnd();

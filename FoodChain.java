@@ -18,6 +18,9 @@ public class FoodChain {
         initialiseFoodChain();;
     }
 
+    /**
+     * Places the relations in the food chain into the hashmap.
+     */
     private void initialiseFoodChain()
     {
         foodChain.put(Tree.class, new ArrayList<>());
@@ -31,16 +34,6 @@ public class FoodChain {
     }
 
     /**
-     * Add a new relation of what an animal eats.
-     * @param entityClass
-     * @param foodOfEntity
-     */
-    public void addRelation(Class entityClass, ArrayList<Class> foodOfEntity)
-    {
-        foodChain.put(entityClass, foodOfEntity);
-    }
-
-    /**
      * Get the food sources of the specified animal
      * @param entityClass The class of the entity.
      * @return An ArrayList of the types of entities the given entity can eat.
@@ -49,7 +42,6 @@ public class FoodChain {
     {
         return foodChain.get(entityClass);
     }
-
 
     /**
      * Returns a list of the levels the food sources of an entity are in

@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * Class Snake - The snake is an animal that movies on the ground. It is a predator and eats only frogs.
+ */
 public class Snake extends Animal {
     // Characteristics shared by all snakes (class variables).
     private static final int BREEDING_AGE = AnimalStats.SNAKE.getBreedingAge();  // The age at which a snake can start to breed.

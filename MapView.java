@@ -4,12 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * A graphical view of the simulation grid.
- * The view displays a colored rectangle for each location
- * representing its contents. It uses a default background color.
- * Colors for each type of species can be defined using the
- * setColor method.
- *
+ * A graphical view of the map grid.
+ * Its displays the different environments on the map using three different colors. A particular environment can be
+ * selected using the buttons on the ControlPanel, and a particular environment on the view will be colored.
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
  */
@@ -69,6 +66,10 @@ public class MapView extends JFrame
         setVisible(true);
     }
 
+    /**
+     * A setter method for the environment instance variable.
+     * @param environment
+     */
     public void setCurrentEnvironment(String environment) {
         currentEnvironment = environment;
     }
@@ -89,8 +90,7 @@ public class MapView extends JFrame
     }
 
     /**
-     * MOVE THE STATS BECAUSE NOT ALL ENTITIES THAT EXISTS ARE SHOWN AND STILL NEED TO BE COUNTED
-     * Show the current status of the field.
+     * Displays the environments using different colors.
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */

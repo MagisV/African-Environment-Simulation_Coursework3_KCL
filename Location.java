@@ -60,6 +60,7 @@ public class Location
     }
     
     /**
+     * Returns the row of the location on the field.
      * @return The row.
      */
     public int getRow()
@@ -68,6 +69,7 @@ public class Location
     }
     
     /**
+     * Returns the col of the location on the field.
      * @return The column.
      */
     public int getCol()
@@ -75,6 +77,10 @@ public class Location
         return col;
     }
 
+    /**
+     * Returns the level at which the location resides.
+     * @return the level of the location
+     */
     public int getLevel() { return level; }
 
 }

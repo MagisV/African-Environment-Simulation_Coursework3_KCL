@@ -101,29 +101,6 @@ public class FieldStats
     }
 
     /**
-     * Decrement the count for one class of animal.
-     * @param animalClass The class of animal to increment.
-     */
-    public void decrementCount(Class animalClass, Entity entity)
-    {
-        Counter count = counters.get(animalClass);
-        if(count == null) {
-            // We do not have a counter for this species yet.
-            // Create one.
-            count = new Counter(animalClass.getName());
-            counters.put(animalClass, count);
-        }
-        if(entity.getLocation().getCol() < entity.getField().getWidth()/3) {
-            count.increment("Savanna");
-
-        } else if(entity.getLocation().getCol() < (entity.getField().getWidth()/3)*2 && entity.getLocation().getCol() > entity.getField().getWidth()/3) {
-            count.increment("Forest");
-        } else {
-            count.increment("Desert");
-        }
-    }
-
-    /**
      * Indicate that an animal count has been completed.
      */
     public void countFinished()
@@ -180,18 +157,5 @@ public class FieldStats
             }
         }
         countsValid = true;
-    }
-
-    public void setCountsValid(boolean isValid)
-    {
-        countsValid = isValid;
-    }
-
-
-    public void updateCounter(List<Entity> list) {
-        for (Entity entity : list)
-        {
-            incrementCount(entity.getClass(), "");
-        }
     }
 }

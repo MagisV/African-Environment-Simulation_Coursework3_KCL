@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * Class Eagle - The Eagle is an animal moving in the air and can fly over other entities. It is a predator and eats frogs and gazelles.
+ */
 public class Eagle extends Animal {
 
     private static final int MAX_ENERGY = AnimalStats.EAGLE.getMaxEnergy();
@@ -11,6 +14,7 @@ public class Eagle extends Animal {
     private final int BREEDING_AGE = AnimalStats.EAGLE.getBreedingAge();
     private final int TIME_ACTIVITY_START = AnimalStats.EAGLE.getTimeActivityStart();
     private final int TIME_ACTIVITY_END = AnimalStats.EAGLE.getTimeActivityEnd();
+
     /**
      * Create a new born eagle at location in field.
      * @param field     The field currently occupied.
@@ -37,30 +41,34 @@ public class Eagle extends Animal {
         super(field, location);
 
         age = rand.nextInt(MAX_AGE);
-        energyLevel = rand.nextInt(MAX_ENERGY); //CHANGE THIS!!!!!
+        energyLevel = rand.nextInt(MAX_ENERGY);
         availableForCoitus = rand.nextBoolean();
         size = AnimalStats.EAGLE.getDefaultSize();
         scent = AnimalStats.EAGLE.getDefaultScent();
         currentBreedingProbability = BREEDING_PROBABILITY;
     }
 
-    // Divide into smaller methods
+    /**
+     * Executed every time an eagle acts. Searching for mates, updating the environment and looking for food are initiated here.
+     * @param newEntities A list of new entities this eagle can add its offspring to.
+     * @param currentTime The current time, the eagle acts accordingly.
+     */
     @Override
-    public void act(List<Entity> newEagles, int currentTime) {
-        super.act(newEagles, currentTime);
+    public void act(List<Entity> newEntities, int currentTime) {
+        super.act(newEntities, currentTime);
         if (isAwake(currentTime)) {
             if (isAlive()) {
                 updateEnvironment();
                 if(availableForCoitus) {
                     if (sex && foundMate(MOVING_RADIUS)) {
-                        giveBirth(newEagles);
+                        giveBirth(newEntities);
                         availableForCoitus = false;
                     }
-                } else {
+                }
+                else {
                     availableForCoitus = true;
                 }
                 // Move towards a source of food if found.
-
                 Location newLocation = findFood();
                 if (newLocation == null) {
                     // No food found - try to move to a free location.
@@ -82,6 +90,7 @@ public class Eagle extends Animal {
     /**
      * Updates the eagle's nutrition value, depending on its age.
      */
+    @Override
     protected void updateFoodValue()
     {
         foodValue = (int) Math.round(2*Math.log(Math.pow(age, 3))); //log grows fast in the beginning and slower at later stages
@@ -91,6 +100,7 @@ public class Eagle extends Animal {
      * Returns the max energy of this species. Animals cant eat if they have reached their max energy.
      * @return The maximum energy
      */
+    @Override
     protected int getMaxEnergy()
     {
         return MAX_ENERGY;
@@ -100,6 +110,7 @@ public class Eagle extends Animal {
      * Returns the max age of this species. If reached, the entity dies.
      * @return The maximum age.
      */
+    @Override
     protected int getMaxAge()
     {
         return MAX_AGE;
@@ -109,12 +120,14 @@ public class Eagle extends Animal {
      * Returns the default breeding probability of this species in bad environments.
      * @return The bad default breeding probability.
      */
+    @Override
     public double getBadEnvironmentBreedingProbability() { return BAD_ENVIRONMENT_BREEDING_PROBABILITY; }
 
     /**
      * Returns the default breeding probability of this species in preferred environments.
      * @return The good default breeding probability.
      */
+    @Override
     public double getBreedingProbability() { return BREEDING_PROBABILITY; }
 
     /**
