@@ -32,7 +32,7 @@ public class Gazelle extends Animal
     public Gazelle(Field field, Location location, double size, double scent) {
         super(field, location);
         age = 0;
-        energyLevel = 20;
+        energyLevel = MAX_ENERGY;
         this.size = getMutationValue(size);
         this.scent = getMutationValue(scent);
         currentBreedingProbability = BREEDING_PROBABILITY;
@@ -48,7 +48,7 @@ public class Gazelle extends Animal
         super(field, location);
 
         age = rand.nextInt(MAX_AGE);
-        energyLevel = rand.nextInt(10); //CHANGE THIS!!!!!
+        energyLevel = rand.nextInt(MAX_ENERGY);
         availableForCoitus = rand.nextBoolean();
         size = AnimalStats.LION.getDefaultSize();
         scent = AnimalStats.LION.getDefaultScent();

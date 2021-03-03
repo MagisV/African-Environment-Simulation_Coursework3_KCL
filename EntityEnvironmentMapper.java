@@ -1,7 +1,9 @@
 import java.util.HashMap;
 
 /**
- * Class EntityEnvironmentMapper - Map
+ * Class EntityEnvironmentMapper - Maps entities to their preferred environment. They have a better chance of propagating there.
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class EntityEnvironmentMapper {
 

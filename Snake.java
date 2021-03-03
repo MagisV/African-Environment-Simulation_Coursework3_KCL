@@ -27,7 +27,7 @@ public class Snake extends Animal {
     public Snake(Field field, Location location, double size, double scent) {
         super(field, location);
         age = 0;
-        energyLevel = 20;
+        energyLevel = MAX_ENERGY;
         this.size = getMutationValue(size);
         this.scent = getMutationValue(scent);
         currentBreedingProbability = BREEDING_PROBABILITY;
@@ -42,7 +42,7 @@ public class Snake extends Animal {
     {
         super(field, location);
         age = rand.nextInt(MAX_AGE);
-        energyLevel = rand.nextInt(20); //CHANGE THIS!!!!!
+        energyLevel = rand.nextInt(MAX_ENERGY);
         availableForCoitus = rand.nextBoolean();
         size = AnimalStats.SNAKE.getDefaultSize();
         scent = AnimalStats.SNAKE.getDefaultScent();

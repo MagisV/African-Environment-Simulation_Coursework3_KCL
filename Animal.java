@@ -14,11 +14,11 @@ public abstract class Animal extends Entity
      */
     enum AnimalStats {
 
-        EAGLE(0, 0.35, 10, 3, 6, 21, 4, 3, 50, 50, 3),
-        FROG(1, 0.82,  6, 2, 6, 21, 1, 1, 50, 5, 1),
-        GAZELLE(5, 0.08, 2, 2, 6, 21, 2, 1, 25, 20, 1),
-        LION(15, 0,  2, 2, 6, 21, 5, 3, 50, 50, 2),
-        SNAKE(5, 0.8, 5, 2, 6, 21, 5, 3, 50, 50, 1);
+        EAGLE(10, 0.3, 2, 3, 6, 21, 4, 3, 50, 50, 3),
+        FROG(1, 0.22,  6, 2, 6, 21, 1, 1, 50, 8, 1),
+        GAZELLE(5, 0.25, 3, 2, 6, 24, 2, 1, 30, 25, 1),
+        LION(15, 0.05,  2, 2, 6, 21, 5, 3, 50, 50, 2),
+        SNAKE(5, 0.2, 2, 2, 6, 21, 5, 3, 50, 50, 1);
 
 
         private final int breedingAge;
@@ -141,9 +141,8 @@ public abstract class Animal extends Entity
         public double getBadEnvironmentBreedingProbability() { return badEnvironmentBreedingProbability; }
     }
 
-    //The sex of the animal. True is male.
-    protected boolean sex;
-    protected boolean availableForCoitus;
+    protected boolean sex; // The sex of the animal. True is male.
+    protected boolean availableForCoitus; // If the animal is ready to produce offspring
     protected double energyLevel; // The energy an animal currently has. // We should make a max energy
 
     // Mutation

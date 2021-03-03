@@ -58,7 +58,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         JFrame frame = new JFrame();
         frame.setTitle("Control Panel");
-        frame.setSize(600, 200);
+        frame.setSize(600, 250);
         frame.setLocation(200, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);

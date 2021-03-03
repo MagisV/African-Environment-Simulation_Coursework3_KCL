@@ -58,7 +58,6 @@ public class Eagle extends Animal {
         super.act(newEntities, currentTime);
         if (isAwake(currentTime)) {
             if (isAlive()) {
-                updateEnvironment();
                 if(availableForCoitus) {
                     if (sex && foundMate(MOVING_RADIUS)) {
                         giveBirth(newEntities);

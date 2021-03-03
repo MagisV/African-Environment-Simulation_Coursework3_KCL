@@ -6,8 +6,8 @@ import java.awt.Color;
  * many participants of this type currently exist within 
  * the simulation. It also stores a count of entities for each environment of the field.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
+ * @author David J. Barnes and Michael Kölling edited by Valentin Magis and Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Counter
 {
@@ -44,6 +44,7 @@ public class Counter
     {
         return count;
     }
+
 
     public int getEnvironmentCount(String environment){
         if(environment.equals("Forest")) {

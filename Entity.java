@@ -46,6 +46,7 @@ public abstract class Entity {
     {
         incrementAge();
         updateFoodValue();
+        updateEnvironment();
     }
 
     /**
@@ -181,12 +182,14 @@ public abstract class Entity {
      */
     protected void updateEnvironment()
     {
-        String environment = entityEnvironmentMapper.getPreferredEnvironment(this);
-        if (environment != null) { // There is a preference entry for this animal in the
-            if (field.getCurrentEnvironment(this.getLocation()).equals(environment)) // The preferred environment is equal to the current environment the entity is in
-                currentBreedingProbability = getBreedingProbability();
-            else
-                currentBreedingProbability = getBadEnvironmentBreedingProbability();
+        if (isAlive()) { // The animal is still alive
+            String environment = entityEnvironmentMapper.getPreferredEnvironment(this);
+            if (environment != null) { // There is a preference entry for this animal in the
+                if (field.getCurrentEnvironment(this.getLocation()).equals(environment)) // The preferred environment is equal to the current environment the entity is in
+                    currentBreedingProbability = getBreedingProbability();
+                else
+                    currentBreedingProbability = getBadEnvironmentBreedingProbability();
+            }
         }
     }
 

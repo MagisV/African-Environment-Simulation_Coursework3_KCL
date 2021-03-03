@@ -1,5 +1,10 @@
 import java.util.List;
 
+/**
+ * Class Tree - A tree is an entity in the simulation. It does not move and can grow on any field. Trees especially grow in forests.
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
+ */
 public class Tree extends Plant {
 
     private static final int MAX_AGE = PlantStats.TREE.getMaxAge(); // Stored in here to be used in superclass.
@@ -15,6 +20,12 @@ public class Tree extends Plant {
     private final int TIME_ACTIVITY_END = PlantStats.TREE.getTimeActivityEnd();
 
 
+    /**
+     * Create a new tree.
+     * @param randomAge If a random age should be generated.
+     * @param field The field to put the tree in.
+     * @param location The location of the new tree.
+     */
     public Tree(boolean randomAge, Field field, Location location)
     {
         super(field, location);
@@ -26,6 +37,13 @@ public class Tree extends Plant {
         }
     }
 
+
+    /**
+     * Calls the act method in the superclass. It also calls the propagate method when the tree is still alive and
+     * awake at the end of its act.
+     * @param newTrees a list to add newly produced species
+     * @param currentTime The current time of the day
+     */
     @Override
     public void act(List<Entity> newTrees, int currentTime) {
         super.act(newTrees, currentTime);
@@ -48,7 +66,7 @@ public class Tree extends Plant {
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeNearbyLocations(getLocation(), 3); // The tree can propagate in a radius of 3
-        int births = propagate();
+        int births = generateSeeds();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Tree seed = new Tree(false, field, loc);
@@ -61,7 +79,7 @@ public class Tree extends Plant {
      * if it can propagate.
      * @return The number of seeds (may be zero).
      */
-    private int propagate()
+    private int generateSeeds()
     {
         int newSeeds = 0;
         if(canBreed() && rand.nextDouble() <= currentBreedingProbability) {
@@ -92,6 +110,7 @@ public class Tree extends Plant {
      * Returns the max age of this species. If reached, the entity dies.
      * @return The maximum age.
      */
+    @Override
     protected int getMaxAge()
     {
         return MAX_AGE;
@@ -101,12 +120,14 @@ public class Tree extends Plant {
      * Returns the default breeding probability of this species in bad environments.
      * @return The bad default breeding probability.
      */
+    @Override
     public double getBadEnvironmentBreedingProbability() { return BAD_ENVIRONMENT_BREEDING_PROBABILITY; }
 
     /**
      * Returns the default breeding probability of this species in preferred environments.
      * @return The good default breeding probability.
      */
+    @Override
     public double getBreedingProbability() { return BREEDING_PROBABILITY; }
 
     /**
