@@ -131,9 +131,7 @@ public class Simulator
      * Load the previous step of the map.
      */
     public void loadPreviousStep() {
-        System.out.println("loaded previous");
         step--;
-        System.out.println(step);
         field.loadPrevious();
         nextEntities.push(entities);
         entities = previousEntities.pop();
@@ -149,7 +147,6 @@ public class Simulator
     {
         if(field.isNext()) {
             step++;
-            System.out.println("isNext");
             field.loadNext();
             previousEntities.push(entities);
             entities = nextEntities.pop();

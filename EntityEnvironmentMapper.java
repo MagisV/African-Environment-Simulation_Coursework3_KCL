@@ -30,6 +30,7 @@ public class EntityEnvironmentMapper {
         entityEnvironmentMap.put(Snake.class, "Forest");
         entityEnvironmentMap.put(Gazelle.class, "Savanna");
         entityEnvironmentMap.put(Lion.class, "Savanna");
+        entityEnvironmentMap.put(Grass.class, "Savanna");
     }
 
     /**

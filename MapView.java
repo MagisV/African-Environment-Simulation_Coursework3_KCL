@@ -14,7 +14,6 @@ import java.util.Map;
 public class MapView extends JFrame
 {
     // Color used for objects that have no defined color.
-    private static final Color UNKNOWN_COLOR = Color.gray;
 
     private final String STEP_PREFIX = "";
     private final String POPULATION_PREFIX = "Population: ";
@@ -30,7 +29,7 @@ public class MapView extends JFrame
 
     /**
      * Create a view of the given width and height.
-     * @param height The simulation's height.
+     * @param height The sim height.
      * @param width  The simulation's width.
      */
     public MapView(int height, int width)
@@ -38,11 +37,10 @@ public class MapView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
-        setTitle("Fox and Gazelle Simulation");
+        setTitle("Map Environment Viewer");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        //mutationLabel = new JLabel(MUTATION_PREFIX, JLabel.CENTER);
 
         currentEnvironment = "Savanna";
 
@@ -58,7 +56,6 @@ public class MapView extends JFrame
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
-        //contents.add(mutationLabel, BorderLayout.EAST);
         pack();
         setVisible(true);
     }
@@ -69,21 +66,6 @@ public class MapView extends JFrame
      */
     public void setCurrentEnvironment(String environment) {
         currentEnvironment = environment;
-    }
-
-    /**
-     * @return The color to be used for a given class of animal.
-     */
-    private Color getColor(Class animalClass)
-    {
-        Color col = colors.get(animalClass);
-        if(col == null) {
-            // no color defined for this class
-            return UNKNOWN_COLOR;
-        }
-        else {
-            return col;
-        }
     }
 
     /**
@@ -126,7 +108,6 @@ public class MapView extends JFrame
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field, currentEnvironment));
         fieldView.repaint();
-
     }
 
     /**

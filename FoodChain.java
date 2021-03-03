@@ -32,7 +32,7 @@ public class FoodChain {
 
         foodChain.put(Gazelle.class, new ArrayList<>(Arrays.asList(Grass.class, Tree.class)));
         foodChain.put(Lion.class, new ArrayList<>(Arrays.asList(Gazelle.class)));
-        foodChain.put(Eagle.class, new ArrayList<>(Arrays.asList(Gazelle.class, Frog.class)));
+        foodChain.put(Eagle.class, new ArrayList<>(Arrays.asList(Gazelle.class, Frog.class, Gazelle.class)));
         foodChain.put(Snake.class, new ArrayList<>(Arrays.asList(Frog.class)));
     }
 

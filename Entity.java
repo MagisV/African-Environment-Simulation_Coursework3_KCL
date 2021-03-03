@@ -182,7 +182,7 @@ public abstract class Entity {
      */
     protected void updateEnvironment()
     {
-        if (isAlive()) { // The animal is still alive
+        if (isAlive()) { // The entity is still alive
             String environment = entityEnvironmentMapper.getPreferredEnvironment(this);
             if (environment != null) { // There is a preference entry for this animal in the
                 if (field.getCurrentEnvironment(this.getLocation()).equals(environment)) // The preferred environment is equal to the current environment the entity is in
@@ -201,13 +201,8 @@ public abstract class Entity {
     protected int breed()
     {
         int newEntities = 0;
-        if(canBreed() && rand.nextDouble() <= currentBreedingProbability) {
+        if(canBreed() && rand.nextDouble() <= currentBreedingProbability)
             newEntities = rand.nextInt(getMaxLitterSize()) + 1;
-        }
-        if (newEntities > 0 && this.getClass() != Grass.class)
-        {
-            System.out.println(this.getClass() + ": " + newEntities);
-        }
         return newEntities;
     }
 

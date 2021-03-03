@@ -146,9 +146,6 @@ public class Field {
     public void loadNext() {
         Entity[][][] temp = nextFields.pop();
         savePrev();
-
-        System.out.println("Size: " + nextFields.size());
-
         for (int level = 0; level < height; level++) {
             for (int row = 0; row < depth; row++) {
                 for (int col = 0; col < width; col++) {

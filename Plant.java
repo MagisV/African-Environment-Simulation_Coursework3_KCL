@@ -13,8 +13,8 @@ public abstract class Plant extends Entity {
      */
     enum PlantStats {
 
-        GRASS(3, 0.3, 8, 0, 6, 21, 15),
-        TREE(10, 0.025, 2, 1, 6, 21, 50);
+        GRASS(3, 0.3, 8, 0, 6, 21, 15, 0.05),
+        TREE(10, 0.025, 2, 1, 6, 21, 50, 0.02);
 
         private int breedingAge; // The minimum age a plant needs to be to be able to breed
         private double breedingProbability; // The default probability a plant propagates
@@ -37,7 +37,7 @@ public abstract class Plant extends Entity {
          * @param timeEnd The time this plant ends its activity. Uses 24 hour format
          * @param maxAge The maximum age a plant can reach. It dies afterwards
          */
-        PlantStats(int breedingAge, double breedingProb, int litterSize, int level, int timeStart, int timeEnd, int maxAge) {
+        PlantStats(int breedingAge, double breedingProb, int litterSize, int level, int timeStart, int timeEnd, int maxAge, double badEnvironmentBreedingProbability) {
             this.breedingAge = breedingAge;
             this.breedingProbability = breedingProb;
             this.maxLitterSize = litterSize;
@@ -45,7 +45,7 @@ public abstract class Plant extends Entity {
             this.timeActivityStart = timeStart;
             this.timeActivityEnd = timeEnd;
             this.maxAge = maxAge;
-            this.badEnvironmentBreedingProbability  = breedingProbability * 0.1; // 90 percent lower
+            this.badEnvironmentBreedingProbability  = badEnvironmentBreedingProbability;
         }
 
         /**

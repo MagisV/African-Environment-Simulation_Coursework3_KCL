@@ -203,7 +203,6 @@ public class ControlPanel extends JFrame implements ActionListener{
                 submitSpeed.setText("Submit");
             }
         } else if (e.getSource() == showMapButton) {
-            System.out.println("The map is big");
             boolean result = simulator.switchMapShowing();
             if (result) {
                 showMapButton.setText("Show Environment Map");
