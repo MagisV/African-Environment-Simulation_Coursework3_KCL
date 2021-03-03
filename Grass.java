@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * A grass is a plant. It is eaten by the gazelle.
  *
- * @author David J. Barnes and Michael Kölling, edited by Valentin Magis and Barnabas Szalai
+ * @author Valentin Magis and Barnabas Szalai
  * @version 2021-03-02
  */
 
@@ -39,7 +39,7 @@ public class Grass extends Plant {
 
     /**
      * Calls the act method of the superclass. Also calls makes the grass propagate if it is alive after the act.
-     * @param newGrass
+     * @param newGrass A list to add new growing seeds to.
      * @param currentTime The current time
      */
     @Override

@@ -20,7 +20,7 @@ public class ControlPanel extends JFrame implements ActionListener{
      * The main method of the project. Calls the method to start the application and creates a new instance of the
      * Simulator class.
      */
-    public static void main(String arg[]) {
+    public static void main(String[] arg) {
         simulator = new Simulator(steps);
         startSimulation();
     }
@@ -33,22 +33,22 @@ public class ControlPanel extends JFrame implements ActionListener{
     }
 
 
-    private JButton nextButton;
-    private JButton pauseButton;
-    private JButton previousButton;
-    private JTextField enteredSpeed;
-    private JButton submitSpeed;
-    private JLabel feedbackMessage;
+    private final JButton nextButton;
+    private final JButton pauseButton;
+    private final JButton previousButton;
+    private final JTextField enteredSpeed;
+    private final JButton submitSpeed;
+    private final JLabel feedbackMessage;
 
-    private JButton showMapButton;
-    private JButton savannaDataButton;
-    private JButton forestDataButton;
-    private JButton desertDataButton;
+    private final JButton showMapButton;
+    private final JButton savannaDataButton;
+    private final JButton forestDataButton;
+    private final JButton desertDataButton;
 
     private boolean paused;
 
     /**
-     * The constructor methods which creates the frame, panel, buttons, labels and textfields on the control panel.
+     * The constructor methods which creates the frame, panel, buttons, labels and textFields on the control panel.
      *
      */
     public ControlPanel() {
@@ -133,7 +133,7 @@ public class ControlPanel extends JFrame implements ActionListener{
     /**
      * This method is called when a button is clicked on the control panel. It manipulates the simulation and the map
      * when specific buttons are clicked.
-     * @param e
+     * @param e Event created when button is clicked,
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -141,7 +141,7 @@ public class ControlPanel extends JFrame implements ActionListener{
         if(e.getSource() == nextButton) {
             displayMessage("", Color.RED);
             paused = true;
-            if(enteredSpeed.isEnabled() == false) {
+            if(!enteredSpeed.isEnabled()) {
                 if (enteredSpeed != null) {
                     int temp;
                     try {
@@ -155,8 +155,6 @@ public class ControlPanel extends JFrame implements ActionListener{
                 } else {
                     simulator.simulateOneStep();
                 }
-            } else {
-
             }
         } else if(e.getSource() == pauseButton) {
             displayMessage("", Color.RED);
@@ -174,7 +172,7 @@ public class ControlPanel extends JFrame implements ActionListener{
             }
         } else if(e.getSource() == previousButton) {
             displayMessage("", Color.RED);
-            if(enteredSpeed.isEnabled() == false) {
+            if(!enteredSpeed.isEnabled()) {
                 if(simulator.getStep() > 0)  {
                     if (enteredSpeed != null) {
                         int enteredAmount;
@@ -194,8 +192,6 @@ public class ControlPanel extends JFrame implements ActionListener{
                 } else {
                    displayMessage("You are at the initial step!", Color.RED);
                 }
-            } else {
-
             }
             paused = true;
         } else if (e.getSource() == submitSpeed) {
@@ -257,6 +253,5 @@ public class ControlPanel extends JFrame implements ActionListener{
 
         feedbackMessage.setText(message);
         feedbackMessage.setForeground(color);
-
     }
 }

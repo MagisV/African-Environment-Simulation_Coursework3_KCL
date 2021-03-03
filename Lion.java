@@ -1,9 +1,8 @@
 import java.util.List;
-import java.util.Iterator;
 
 
 /**
- * A simple model of a Lion.
+ * A model of a Lion.
  * Lions age, move, eat rabbits, and die.
  *
  * @author Valentin Magis, Barnabas Szalai
@@ -62,14 +61,14 @@ public class Lion extends Animal
      * or die of old age.
      * //@param field The field currently occupied.
      * @param newLions A list to return newly born lions.
-     * @param currentTime
+     * @param currentTime The current time
      */
     public void act(List<Entity> newLions, int currentTime)
     {
         super.act(newLions, currentTime);
         if (isAwake(currentTime)) { // The lion is active
             if (isAlive()) {
-                if (sex && foundMate(2)) { // HARDCODED!
+                if (sex && foundMate((int) scent)) { // HARDCODED!
                     giveBirth(newLions);
                 }
                 // Move towards a source of food if found.

@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class Animal extends Entity
 {
     /**
-     * The animals and their statistics that can be used.
+     * The animals and their statistics that are needed when acting.
      */
     enum AnimalStats {
 
@@ -18,7 +18,7 @@ public abstract class Animal extends Entity
         FROG(1, 0.22,  6, 2, 6, 21, 1, 1, 50, 8, 1),
         GAZELLE(5, 0.25, 3, 2, 6, 24, 2, 1, 30, 25, 1),
         LION(15, 0.05,  2, 2, 6, 21, 5, 3, 50, 50, 2),
-        SNAKE(5, 0.2, 2, 2, 6, 21, 5, 3, 50, 50, 1);
+        SNAKE(5, 0.4, 5, 2, 18, 24, 2, 2, 50, 70, 1);
 
 
         private final int breedingAge;
@@ -62,7 +62,7 @@ public abstract class Animal extends Entity
             this.maxEnergy = maxEnergy;
             this.maxAge = maxAge;
             this.movingRadius = movingRadius;
-            this.badEnvironmentBreedingProbability  = breedingProbability * 0.1; // 90 percent lower
+            this.badEnvironmentBreedingProbability  = breedingProbability * 0.05; // 90 percent lower
         }
 
         /**
@@ -196,7 +196,7 @@ public abstract class Animal extends Entity
      */
     protected void incrementHunger()
     {
-        energyLevel -= Math.round((size + scent) / 2);
+        energyLevel -= Math.round((size + scent));
         if (energyLevel <= 0)
         {
             setDead();
@@ -233,7 +233,6 @@ public abstract class Animal extends Entity
     }
 
     /**
-     * //Maybe refactor this into multiple mehtods?
      * Look for food sources in adjacent locations.
      * Only the first found food source is eaten.
      * @return Where food was found, or null if it wasn't.
@@ -241,8 +240,7 @@ public abstract class Animal extends Entity
     protected Location findFood()
     {
         Field field = getField();
-        List<Location> adjacent = new ArrayList<>();
-        adjacent.addAll(field.adjacentLocations(getLocation(), foodChain.getFoodSourceLevels(this.getClass()), (int) Math.round(scent))); //Get the adjacent locations of the levels the current animal eats at and with the scent range this animal has. (E.g. Gazelles look for food at level 0 and 1)
+        List<Location> adjacent = new ArrayList<>(field.adjacentLocations(getLocation(), foodChain.getFoodSourceLevels(this.getClass()), (int) Math.round(scent))); //Get the adjacent locations of the levels the current animal eats at and with the scent range this animal has. (E.g. Gazelles look for food at level 0 and 1)
         ArrayList<Class> foodSources = foodChain.getFoodSources(this.getClass()); // Get the entities this animal eats.
 
         Iterator<Location> it = adjacent.iterator();
@@ -282,14 +280,12 @@ public abstract class Animal extends Entity
      * A function to simulate a fight between a predator and a prey. Returns true when the predator wins.
      * @param predator the predator that is chasing the prey
      * @param prey the prey that the predator wants to eat
-     * @return a boolean whether the predator successfully faught the prey
+     * @return a boolean whether the predator successfully fought the prey
      */
     private boolean wonFight(Animal predator, Animal prey)
     {
-        if (prey.getSize() < predator.getSize() * rand.nextDouble()) // Generates a double within the range of 0 and the predators size. If the generated number is within in preys size, the prey wins the fight and is not eaten
-            return true;
-        else
-            return false;
+        // Generates a double within the range of 0 and the predators size. If the generated number is within in preys size, the prey wins the fight and is not eaten
+        return prey.getSize() < predator.getSize() * rand.nextDouble();
     }
 
     /**
@@ -337,7 +333,7 @@ public abstract class Animal extends Entity
 
     /**
      * Create a new animal
-     * @param field The field to put the entitiy in
+     * @param field The field to put the entity in
      * @param loc The location of the new entity
      * @param size The size passed on from the parent.
      * @param scent The scent passed on from the parent

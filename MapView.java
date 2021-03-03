@@ -13,15 +13,11 @@ import java.util.Map;
  */
 public class MapView extends JFrame
 {
-    // Colors used for empty locations.
-    private static final Color EMPTY_COLOR = Color.white;
-
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
 
     private final String STEP_PREFIX = "";
     private final String POPULATION_PREFIX = "Population: ";
-    //private final String MUTATION_PREFIX = "Mutations: ";
     private JLabel stepLabel, population, infoLabel;
     private FieldView fieldView;
 
@@ -69,7 +65,7 @@ public class MapView extends JFrame
 
     /**
      * A setter method for the environment instance variable.
-     * @param environment
+     * @param environment The environment to be set.
      */
     public void setCurrentEnvironment(String environment) {
         currentEnvironment = environment;
@@ -92,34 +88,32 @@ public class MapView extends JFrame
 
     /**
      * Displays the environments using different colors.
-     * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(Field field)
     {
 
         stepLabel.setText("");
         stats.reset();
 
         fieldView.preparePaint();
-        //int[] beachBorders = field.getSavannaEnvironment();
 
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 if(col <= field.getSavannaEnvironment().getEndCol()) {
-                    if(currentEnvironment != "Savanna") {
+                    if(!"Savanna".equals(currentEnvironment)) {
                         fieldView.drawMark(col, row, Color.gray);
                     } else {
                         fieldView.drawMark(col, row, Color.YELLOW);
                     }
                 } else if(col > field.getSavannaEnvironment().getEndCol() && col <= field.getForestEnvironment().getEndCol()) {
-                    if(currentEnvironment != "Forest") {
+                    if(!"Forest".equals(currentEnvironment)) {
                         fieldView.drawMark(col, row, Color.gray);
                     } else {
                         fieldView.drawMark(col, row, Color.GREEN);
                     }
                 } else {
-                    if(currentEnvironment != "Desert") {
+                    if(!"Desert".equals(currentEnvironment)) {
                         fieldView.drawMark(col, row, Color.gray);
                     } else {
                         fieldView.drawMark(col, row, Color.ORANGE);
@@ -131,7 +125,6 @@ public class MapView extends JFrame
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field, currentEnvironment));
-        //mutationLabel.setText(MUTATION_PREFIX + stats.getMutationDetails(field));
         fieldView.repaint();
 
     }

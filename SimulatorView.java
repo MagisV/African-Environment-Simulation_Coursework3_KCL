@@ -11,7 +11,7 @@ import java.util.Map;
  * setColor method.
  * 
  * @author David J. Barnes and Michael Kölling edited by Barnabas Szalai and Valentin Magis
- * @version 2016.02.29
+ * @version 2021-03-02
  */
 public class SimulatorView extends JFrame
 {
@@ -23,8 +23,7 @@ public class SimulatorView extends JFrame
 
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    //private final String MUTATION_PREFIX = "Mutations: ";
-    private JLabel stepLabel, population, infoLabel;
+    private JLabel stepLabel, population;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -42,11 +41,9 @@ public class SimulatorView extends JFrame
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
-        setTitle("Fox and Gazelle Simulation");
+        setTitle("African Environment Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
-        infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
-        //mutationLabel = new JLabel(MUTATION_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
         
@@ -56,11 +53,9 @@ public class SimulatorView extends JFrame
         
         JPanel infoPane = new JPanel(new BorderLayout());
         infoPane.add(stepLabel, BorderLayout.WEST);
-        infoPane.add(infoLabel, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
-        //contents.add(mutationLabel, BorderLayout.EAST);
         pack();
         setVisible(true);
     }
@@ -73,14 +68,6 @@ public class SimulatorView extends JFrame
     public void setColor(Class animalClass, Color color)
     {
         colors.put(animalClass, color);
-    }
-
-    /**
-     * Display a short information label at the top of the window.
-     */
-    public void setInfoText(String text)
-    {
-        infoLabel.setText(text);
     }
 
     /**
@@ -117,12 +104,8 @@ public class SimulatorView extends JFrame
 
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                Object entity = field.getObjectOnTop(row, col, field);
+                Object entity = field.getObjectOnTop(row, col);
                 if(entity != null) {
-                    //stats.incrementCount(entity.getClass()); //not needed anymore. Made generatecounts in fieldstats public and generate them below,
-                    // This method sucks tho because stats are newly calculated every step.
-                    // It would be enough to just update them (increment with new and decrement when animals die
-                    // I have already tried doing this but is not finished yet. Works so far though.
                     fieldView.drawMark(col, row, getColor(entity.getClass()));
                 }
                 else {
@@ -134,7 +117,6 @@ public class SimulatorView extends JFrame
         stats.countFinished();
 
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
-        //mutationLabel.setText(MUTATION_PREFIX + stats.getMutationDetails(field));
         fieldView.repaint();
     }
 

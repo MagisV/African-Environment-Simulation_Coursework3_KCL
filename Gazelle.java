@@ -59,14 +59,14 @@ public class Gazelle extends Animal
      * This is what the gazelle does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      * @param newGazelles A list to return newly born gazelles.
-     * @param currentTime
+     * @param currentTime The current time
      */
     public void act(List<Entity> newGazelles, int currentTime)
     {
         super.act(newGazelles, currentTime);
         if (isAwake(currentTime)) {
             if (isAlive()) {
-                if (sex && foundMate(8)) {
+                if (sex && foundMate((int) scent)) {
                     giveBirth(newGazelles);
                 }
                 // Move towards a source of food if found.

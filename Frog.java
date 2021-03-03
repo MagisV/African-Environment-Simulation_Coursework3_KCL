@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,8 +10,8 @@ import java.util.List;
 public class Frog extends Animal
 {
     // Characteristics shared by all frogs (class variables).
-    private static final int BREEDING_AGE = AnimalStats.FROG.getBreedingAge();  // The age at which a frog can start to breed.
-    private static final int MAX_LITTER_SIZE = AnimalStats.FROG.getMaxLitterSize();     // The maximum number of births.
+    private static final int BREEDING_AGE = AnimalStats.FROG.getBreedingAge();
+    private static final int MAX_LITTER_SIZE = AnimalStats.FROG.getMaxLitterSize();
 
     private static final int MAX_ENERGY = AnimalStats.FROG.getMaxEnergy();
     private static final int MAX_AGE = AnimalStats.FROG.getMaxAge();
@@ -60,7 +59,7 @@ public class Frog extends Animal
      * This is what the frog does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      * @param newFrogs A list to return newly born frogs.
-     * @param currentTime
+     * @param currentTime The current time
      */
     public void act(List<Entity> newFrogs, int currentTime)
     {
@@ -99,7 +98,7 @@ public class Frog extends Animal
      */
     protected void updateFoodValue()
     {
-        foodValue = (int) Math.round(3*Math.log(age));//(int) Math.round(2*Math.log(age)); //log grows fast in the beginning and slower at later stages
+        foodValue = (int) Math.round(3*Math.log(age)); //log grows fast in the beginning and slower at later stages
     }
 
     /**

@@ -12,7 +12,7 @@ public class EntityEnvironmentMapper {
 
 
     /**
-     *
+     * Create an EntityEnvironmentMapper. Initialized automatically.
      */
     public EntityEnvironmentMapper()
     {
@@ -21,12 +21,11 @@ public class EntityEnvironmentMapper {
     }
 
     /**
-     *
+     *  Initialize the preferred environments of entities. Not all entities have a preferred environment.
      */
     private void initializeMap()
     {
         entityEnvironmentMap.put(Eagle.class, "Desert");
-
         entityEnvironmentMap.put(Tree.class, "Forest");
         entityEnvironmentMap.put(Snake.class, "Forest");
         entityEnvironmentMap.put(Gazelle.class, "Savanna");

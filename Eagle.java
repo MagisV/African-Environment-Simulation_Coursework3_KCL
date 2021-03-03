@@ -62,7 +62,7 @@ public class Eagle extends Animal {
         if (isAwake(currentTime)) {
             if (isAlive()) {
                 if(availableForCoitus) {
-                    if (sex && foundMate(MOVING_RADIUS)) {
+                    if (sex && foundMate((int) scent)) {
                         giveBirth(newEntities);
                         availableForCoitus = false;
                     }

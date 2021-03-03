@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * Represent a rectangular grid of field positions.
+ * Class Field - Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  * 
  * @author David J. Barnes and Michael Kölling, edited by Valentin Magis and Barnabas Szalai
@@ -13,15 +13,17 @@ public class Field {
     private static final Random rand = Randomizer.getRandom();
 
     // The depth and width of the field.
-    private int depth, width, height;
+    private final int depth;
+    private final int width;
+    private final int height;
     // Storage for the animals.
-    private Entity[][][] field;
+    private final Entity[][][] field;
     private Stack<Entity[][][]> previousFields;
     private Stack<Entity[][][]> nextFields;
 
-    private Environment savannaEnvironment;
-    private Environment forestEnvironment;
-    private Environment desertEnvironment;
+    private final Environment savannaEnvironment;
+    private final Environment forestEnvironment;
+    private final Environment desertEnvironment;
 
 
     /**
@@ -50,7 +52,7 @@ public class Field {
     public String getCurrentEnvironment(Location location) {
         if(location.getCol() <= savannaEnvironment.getEndCol()) {
             return "Savanna";
-        } else if(location.getCol() > savannaEnvironment.getEndCol() && location.getCol() < forestEnvironment.getStartCol() ) {
+        } else if(location.getCol() > savannaEnvironment.getEndCol() && location.getCol() < desertEnvironment.getStartCol() ) {
             return "Forest";
         } else {
             return "Desert";
@@ -227,7 +229,7 @@ public class Field {
      * @param col The desired column
      * @return The entity with the highest painting hierarchy
      */
-    public Object getObjectOnTop(int row, int col, Field field)
+    public Object getObjectOnTop(int row, int col)
     {
 
         if (this.getEntityAt(row, col, 3) != null) //Air animals are at the top and therefore painted first
@@ -244,20 +246,6 @@ public class Field {
 
         else
             return null;
-    }
-    
-    /**
-     * Generate a random location that is adjacent to the
-     * given location, or is the same location.
-     * The returned location will be within the valid bounds
-     * of the field.
-     * @param location The location from which to generate an adjacency.
-     * @return A valid location within the grid area.
-     */
-    public Location randomAdjacentLocation(Location location)
-    {
-        List<Location> adjacent = adjacentLocations(location);
-        return adjacent.get(0); 
     }
 
     /**
@@ -359,7 +347,7 @@ public class Field {
      */
     public boolean isFree(Location location)
     {
-        switch (location.getLevel()) //The level that the specified field is at //enums would be nice //also a seperate method checking for validity instead of having all the conditions here.
+        switch (location.getLevel()) //The level that the specified field is at //enums would be nice //also a separate method checking for validity instead of having all the conditions here.
         {
             case 0: if(getObjectAtLevel(location, 0) == null && getObjectAtLevel(location, 1) == null) //we are looking at level 0 (grass). Object at level 0 (grass) or level 1 (tree) makes the field occupied
                 return true;

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Tree extends Plant {
 
-    private static final int MAX_AGE = PlantStats.TREE.getMaxAge(); // Stored in here to be used in superclass.
+    private static final int MAX_AGE = PlantStats.TREE.getMaxAge();
     private static final int MAX_EATABLE_AGE = 3;
     private static final int MAX_LITTER_SIZE = PlantStats.TREE.getMaxLitterSize();
 
@@ -19,7 +19,6 @@ public class Tree extends Plant {
 
     private final int TIME_ACTIVITY_START = PlantStats.TREE.getTimeActivityStart();
     private final int TIME_ACTIVITY_END = PlantStats.TREE.getTimeActivityEnd();
-
 
     /**
      * Create a new tree.
@@ -38,7 +37,6 @@ public class Tree extends Plant {
         }
     }
 
-
     /**
      * Calls the act method in the superclass. It also calls the propagate method when the tree is still alive and
      * awake at the end of its act.
@@ -54,7 +52,6 @@ public class Tree extends Plant {
             }
         }
     }
-
 
     /**
      * Check whether or not this tree can propagate at this step
@@ -100,7 +97,7 @@ public class Tree extends Plant {
 
     /**
      * Returns if the tree is still small and can be eaten.
-     * @return
+     * @return If the tree is eatable.
      */
     @Override
     public boolean isEatable() {

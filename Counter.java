@@ -1,5 +1,3 @@
-import java.awt.Color;
-
 /**
  * Provide a counter for a participant in the simulation.
  * This includes an identifying string and a count of how
@@ -11,16 +9,12 @@ import java.awt.Color;
  */
 public class Counter
 {
-    // A name for this type of simulation participant
-    private String name;
-    // How many of this type exist in the simulation.
-    private int count;
-    // How many of this type exist in the savanna environment
-    private int savannaCount;
-    // How many of this type exist in the forest environment
-    private int forestCount;
-    // How many of this type exist in the desert environment
-    private int desertCount;
+
+    private final String name;        // A name for this type of simulation participant
+    private int count;          // How many of this type exist in the simulation.
+    private int savannaCount;   // How many of this type exist in the savanna environment
+    private int forestCount;    // How many of this type exist in the forest environment
+    private int desertCount;    // How many of this type exist in the desert environment
 
     /**
      * Provide a name for one of the simulation types.
@@ -50,19 +44,20 @@ public class Counter
 
     /**
      * Returns an integer value of the number of the total
-     * @param environment
-     * @return
+     * @param environment The name of the environment
+     * @return The count of the given environment.
      */
 
     public int getEnvironmentCount(String environment){
-        if(environment.equals("Forest")) {
-            return forestCount;
-        } else if(environment.equals("Savanna")) {
-            return savannaCount;
-        } else if (environment.equals("Desert")) {
-            return desertCount;
-        } else {
-            return 0;
+        switch (environment) {
+            case "Forest":
+                return forestCount;
+            case "Savanna":
+                return savannaCount;
+            case "Desert":
+                return desertCount;
+            default:
+                return 0;
         }
     }
 

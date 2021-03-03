@@ -2,15 +2,12 @@ import java.util.*;
 import java.awt.Color;
 
 /**
- * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * Class Simulator - Provides the frame for a simulation. Initializes a newly created map with animals according to a
+ * certain probability. A loop lets all entities act at each step.
  A
- * @author David J. Barnes and Michael Kölling edit by Valentin Magis and Barnabas Szalai
- * @version 2016.02.29 (2)
+ * @author David J. Barnes and Michael Kölling edited by Valentin Magis and Barnabas Szalai
+ * @version 2021-03-02
  */
-
-
-
 public class Simulator
 {
     // Constants representing configuration information for the simulation.
@@ -28,8 +25,6 @@ public class Simulator
 
     private static final int DAY_LENGTH = 15;
 
-    //WE SHOULD CREATE A SEPARATE CLASS FOR INITIALISING
-
     private List<Entity> entities;   // List of animals in the field.
     private Stack<List<Entity>> previousEntities;
     private Stack<List<Entity>> nextEntities;
@@ -40,24 +35,11 @@ public class Simulator
 
     private MapView mapView;
 
-
     private static final Time clock = new Time(DAY_LENGTH); // A clock imitating time. Animals behave differently at different times.
 
-    //private FieldStats currentStats;
-
-
-    public int getStep() {
-        return step;
-    }
-
-    /**
-     * Start a Simulation
-     * @param args
-     */
 
     /**
      * Construct a simulation field with default size.
-     * @param
      * @param steps
      */
     public Simulator(int steps)
@@ -85,8 +67,6 @@ public class Simulator
         entities = new ArrayList<>();
         field = new Field(depth, width);
 
-        //currentStats = new FieldStats();
-
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         mapView = new MapView(depth, width);
@@ -99,16 +79,12 @@ public class Simulator
         mapView.setVisible(false);
     }
 
-    public void showMap(boolean value) {
-        mapView.setVisible(value);
-    }
-
+    /**
+     * Toggle showing the map.
+     * @return If the map is showing.
+     */
     public boolean switchMapShowing() {
-       if(mapView.isVisible()) {
-           mapView.setVisible(false);
-       } else {
-           mapView.setVisible(true);
-       }
+        mapView.setVisible(!mapView.isVisible());
        return !mapView.isVisible();
     }
     
@@ -129,34 +105,31 @@ public class Simulator
     public void simulate(int numSteps)
     {
         int tempStep = this.step+1;
-        while(tempStep <= numSteps && view.isViable(field) && control.getPaused() == false) {
+        while(tempStep <= numSteps && view.isViable(field) && !control.getPaused()) {
             simulateOneStep();
-            //delay(60);   // uncomment this to run more slowly
             tempStep++;
-            //printAnimals(); // Just for testing
         }
     }
 
+    /**
+     * @return The current step of the simulation.
+     */
+    public int getStep() {
+        return step;
+    }
+
+    /**
+     * Sets the current environment to be highlighted. Called from the control panel.
+     * @param environment The environment to be highlighted.
+     */
     public void setCurrentEnvironmentInspection(String environment) {
         mapView.setCurrentEnvironment(environment);
-        mapView.showStatus(step, field);
+        mapView.showStatus(field);
     }
 
-    private void printAnimals()
-    {
-        for (int col = 0; col < field.getWidth(); col++) {
-            for (int row = 0; row < field.getDepth(); row++) {
-                for (int lvl = 0; lvl < field.getHeight(); lvl++) {
-                    System.out.print(lvl + ": " + field.getEntityAt(row, col, lvl) + " ");
-                }
-                System.out.println();
-            }
-        }
-        System.out.println();
-        System.out.println("#############################");
-        System.out.println();
-    }
-
+    /**
+     * Load the previous step of the map.
+     */
     public void loadPreviousStep() {
         System.out.println("loaded previous");
         step--;
@@ -165,13 +138,12 @@ public class Simulator
         nextEntities.push(entities);
         entities = previousEntities.pop();
         view.showStatus(step, field);
-        mapView.showStatus(step, field);
+        mapView.showStatus(field);
     }
     
     /**
      * Run the simulation from its current state for a single step.
-     * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * Iterate over the whole field updating the state of each entity.
      */
     public void simulateOneStep()
     {
@@ -182,7 +154,7 @@ public class Simulator
             previousEntities.push(entities);
             entities = nextEntities.pop();
             view.showStatus(step, field);
-            mapView.showStatus(step, field);
+            mapView.showStatus(field);
         } else {
             step++;
             // Provide space for newborn animals.
@@ -193,18 +165,14 @@ public class Simulator
                 entity.act(newEntities, clock.getCurrentTime(step));
                 if (!entity.isAlive()) {
                     it.remove();
-                    //currentStats.decrementCount(entity.getClass()); //Entity has died. Decrement the count.
                 }
             }
-
-            // Update the counter for all newly created entities
-            //currentStats.updateCounter(entities);
 
             // Add the newly born foxes and rabbits to the main lists.
             entities.addAll(newEntities);
             previousEntities.push(entities);
             view.showStatus(step, field);
-            mapView.showStatus(step, field);
+            mapView.showStatus(field);
 
             //place current items in the stack
             field.savePrev();
@@ -216,13 +184,13 @@ public class Simulator
      */
     public void reset()
     {
-        //step = 0;
+        step = 0;
         entities.clear();
         populate();
         
         // Show the starting state in the view.
         view.showStatus(step, field);
-        mapView.showStatus(step, field);
+        mapView.showStatus(field);
     }
 
 
@@ -282,9 +250,12 @@ public class Simulator
                 }
             }
         }
-        //printAnimals();
     }
 
+    /**
+     * Randomly selects an entity type. Used in populate() to place animals in the map.
+     * @return The selected entity type.
+     */
     private Class getRandomEntity()
     {
         Random rand = Randomizer.getRandom();
@@ -303,20 +274,5 @@ public class Simulator
         else if (rand.nextDouble() <= TREE_CREATION_PROBABILITY + GRASS_CREATION_PROBABILITY + LION_CREATION_PROBABILITY + GAZELLE_CREATION_PROBABILITY + FROG_CREATION_PROBABILITY + EAGLE_CREATION_PROBABILITY+SNAKE_CREATION_PROBABILITY)
             return Snake.class;
         else return null; //No entity at this field
-    }
-
-
-    /**
-     * Pause for a given time.
-     * @param millisec  The time to pause for, in milliseconds
-     */
-    private void delay(int millisec)
-    {
-        try {
-            Thread.sleep(millisec);
-        }
-        catch (InterruptedException ie) {
-            // wake up
-        }
     }
 }

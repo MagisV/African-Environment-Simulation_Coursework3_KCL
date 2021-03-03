@@ -7,7 +7,7 @@ import java.util.List;
  * @version 2021-03-02
  */
 public class Snake extends Animal {
-    // Characteristics shared by all snakes (class variables).
+    // Characteristics shared by all snakes.
     private static final int BREEDING_AGE = AnimalStats.SNAKE.getBreedingAge();  // The age at which a snake can start to breed.
     private static final int MAX_LITTER_SIZE = AnimalStats.SNAKE.getMaxLitterSize();     // The maximum number of births.
 
@@ -38,7 +38,7 @@ public class Snake extends Animal {
 
     /**
      * Create a new default Snake at location in field.
-     * @param field    The fielsd currently occupied.
+     * @param field    The field currently occupied.
      * @param location The location within the field.
      */
     public Snake(Field field, Location location)
@@ -58,15 +58,14 @@ public class Snake extends Animal {
      * or die of old age.
      * //@param field The field currently occupied.
      * @param newSnakes A list to return newly born snakes.
-     * @param currentTime
+     * @param currentTime The current time
      */
     public void act(List<Entity> newSnakes, int currentTime)
     {
         super.act(newSnakes, currentTime);
         if (isAwake(currentTime)) { // The snake is active
             if (isAlive()) {
-                if (sex && foundMate(2)) { // HARDCODED!
-                    System.out.println("New Snakes");
+                if (sex && foundMate((int) scent)) {
                     giveBirth(newSnakes);
                 }
                 // Move towards a source of food if found.

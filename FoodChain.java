@@ -10,8 +10,8 @@ import java.util.HashMap;
  */
 public class FoodChain {
 
-    private HashMap<Class, ArrayList<Class>> foodChain;
-    private EntityLevelMapper entityLevelMap = new EntityLevelMapper();
+    private final HashMap<Class, ArrayList<Class>> foodChain;
+    private final EntityLevelMapper entityLevelMap = new EntityLevelMapper();
     /**
      * Create a HashMap storing the food chain relationships.
      */
@@ -55,9 +55,8 @@ public class FoodChain {
     {
         ArrayList<Class> currentFoods = foodChain.get(entityClass);
         ArrayList<Integer> levels = new ArrayList<>();
-        for (int i = 0; i < currentFoods.size(); i++)
-        {
-            levels.add(entityLevelMap.getEntityLevel(currentFoods.get(i)));
+        for (Class currentFood : currentFoods) {
+            levels.add(entityLevelMap.getEntityLevel(currentFood));
         }
         return levels;
     }

@@ -8,6 +8,10 @@ public class Time {
 
     public final double DAY_LENGTH;
 
+    /**
+     * Create a clock for the given time length.
+     * @param dayLength The length of the day.
+     */
     public Time(int dayLength)
     {
         DAY_LENGTH = dayLength;
@@ -16,7 +20,7 @@ public class Time {
 
     /**
      * Calculates the current time.
-     * @param currentTicks
+     * @param currentTicks The current ticks of the simulation. Time depends on the ticks.
      * @return The current time. A number between 0 and 24;
      */
     public int getCurrentTime(int currentTicks)

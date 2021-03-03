@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * Helperclass EntityLevelMapper - This class specifies at what level of the map each entity type is moving at.
+ * Helper class EntityLevelMapper - This class specifies at what level of the map each entity type is moving at.
  *
  * @author Valentin Magis, Barnabas Szalai
  * @version 2021-03-02
@@ -46,7 +46,7 @@ public class EntityLevelMapper {
      * @return The number of levels specified.
      */
     public int getAmountOfLevels() {
-        HashSet set = new HashSet(entityLevelMap.values());
+        HashSet set = new HashSet(entityLevelMap.values()); // Sets only store unique values.
         return set.size();
     }
 }

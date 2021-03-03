@@ -1,13 +1,12 @@
 import java.util.HashMap;
-import java.util.List;
 
 /**
- * This class collects and provides some statistical data on the state 
+ * Class This class collects and provides some statistical data on the state
  * of a field. It is flexible: it will create and maintain a counter 
  * for any class of object that is found within the field.
  * 
- * @author David J. Barnes and Michael Kölling edit by Valentin Magis and Barnabas Szalai
- * @version 2016.02.29
+ * @author David J. Barnes and Michael Kölling edited by Valentin Magis and Barnabas Szalai
+ * @version 2021-03-02
  */
 public class FieldStats
 {
@@ -35,11 +34,9 @@ public class FieldStats
     {
         StringBuffer buffer = new StringBuffer();
         if(!countsValid) {
-            //generateCounts(field);
-
+            generateCounts(field);
         }
         for(Class key : counters.keySet()) {
-            //System.out.println("asd :" + counters.get(key));
             Counter info = counters.get(key);
             buffer.append(info.getName());
             buffer.append(": ");
@@ -57,11 +54,9 @@ public class FieldStats
     {
         StringBuffer buffer = new StringBuffer();
         if(!countsValid) {
-            //generateCounts(field);
-
+            generateCounts(field);
         }
         for(Class key : counters.keySet()) {
-            //System.out.println("asd :" + counters.get(key));
             Counter info = counters.get(key);
             buffer.append(info.getName());
             buffer.append(": ");
@@ -135,7 +130,6 @@ public class FieldStats
      * are placed in the field, but only when a request
      * is made for the information.
      * @param field The field to generate the stats for.
-     *              //Maybe turn this around?
      */
     public void generateCounts(Field field)
     {

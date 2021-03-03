@@ -110,8 +110,8 @@ public abstract class Entity {
     protected abstract void updateFoodValue();
 
     /**
-     * Return the foodValue of this entity.
-     * @return
+     * Return the foodValue of this entity. This is the energy other animals get from eating this entity.
+     * @return The food value.
      */
     protected int getFoodValue()
     {
@@ -178,8 +178,7 @@ public abstract class Entity {
     protected abstract int getTimeActivityEnd();
 
     /**
-     * Return if the entity is in its preferred environment. Some animals have a preferred environment where they can live better.
-     * @return If the entity is in its preferred environment.
+     * Adjust the entities breeding probability according to the environment it is in.
      */
     protected void updateEnvironment()
     {

@@ -7,9 +7,9 @@
 
 public class Environment{
 
-    private String name;
-    private int startCol;
-    private int endCol;
+    private final String name;
+    private final int startCol;
+    private final int endCol;
 
 
     /**

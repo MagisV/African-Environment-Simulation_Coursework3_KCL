@@ -11,8 +11,6 @@ public class Location
     private int col;
     private int level;
 
-    private String environment;
-
     /**
      * Represent a row and column.
      * @param row The row.
