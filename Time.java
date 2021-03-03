@@ -1,5 +1,8 @@
 /**
  * Class Time - keeps track of day & night
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Time {
 

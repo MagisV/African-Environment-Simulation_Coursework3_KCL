@@ -6,7 +6,7 @@ import java.util.List;
  * of a field. It is flexible: it will create and maintain a counter 
  * for any class of object that is found within the field.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes and Michael Kölling edit by Valentin Magis and Barnabas Szalai
  * @version 2016.02.29
  */
 public class FieldStats

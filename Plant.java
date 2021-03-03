@@ -1,3 +1,11 @@
+/**
+ * Plant Class - A plat is a superclass that provides an enum for all of the plant objects.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
+ */
+
+
 public abstract class Plant extends Entity {
     //Biome biome;
 

@@ -1,5 +1,8 @@
 /**
  * Class Environment - A class that keeps track of the borders of each environment.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 
 public class Environment{

@@ -3,6 +3,9 @@ import java.util.HashSet;
 
 /**
  * Helperclass EntityLevelMapper - This class specifies at what level of the map each entity type is moving at.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class EntityLevelMapper {
 

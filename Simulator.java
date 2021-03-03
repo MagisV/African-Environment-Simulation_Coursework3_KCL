@@ -4,8 +4,8 @@ import java.awt.Color;
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
- *
- * @author David J. Barnes and Michael Kölling
+ A
+ * @author David J. Barnes and Michael Kölling edit by Valentin Magis and Barnabas Szalai
  * @version 2016.02.29 (2)
  */
 

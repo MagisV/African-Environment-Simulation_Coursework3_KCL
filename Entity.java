@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * Class Entity - An entity is a living thing that is represented in the simulator. All animals and plants indirectly inherit from this class.
+ *
  * @author Valentin Magis, Barnabas Szalai
  * @version 2021-03-02
  */

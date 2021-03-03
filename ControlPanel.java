@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 /**
  * Class Control Panel - A control panel that allows for the manipulation of the simulation. It allows for stopping
  * the simulation and running it by a specified step at a time.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class ControlPanel extends JFrame implements ActionListener{
 
@@ -16,7 +19,6 @@ public class ControlPanel extends JFrame implements ActionListener{
     /**
      * The main method of the project. Calls the method to start the application and creates a new instance of the
      * Simulator class.
-     * @param arg
      */
     public static void main(String arg[]) {
         simulator = new Simulator(steps);

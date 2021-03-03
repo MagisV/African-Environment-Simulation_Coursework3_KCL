@@ -5,8 +5,8 @@ import java.awt.Color;
  * This includes an identifying string and a count of how
  * many participants of this type currently exist within 
  * the simulation. It also stores a count of entities for each environment of the field.
- * 
- * @author David J. Barnes and Michael Kölling edited by Valentin Magis and Barnabas Szalai
+ *
+ * @author Valentin Magis, Barnabas Szalai
  * @version 2021-03-02
  */
 public class Counter
@@ -15,8 +15,11 @@ public class Counter
     private String name;
     // How many of this type exist in the simulation.
     private int count;
+    // How many of this type exist in the savanna environment
     private int savannaCount;
+    // How many of this type exist in the forest environment
     private int forestCount;
+    // How many of this type exist in the desert environment
     private int desertCount;
 
     /**
@@ -45,6 +48,11 @@ public class Counter
         return count;
     }
 
+    /**
+     * Returns an integer value of the number of the total
+     * @param environment
+     * @return
+     */
 
     public int getEnvironmentCount(String environment){
         if(environment.equals("Forest")) {

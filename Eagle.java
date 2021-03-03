@@ -2,6 +2,9 @@ import java.util.List;
 
 /**
  * Class Eagle - The Eagle is an animal moving in the air and can fly over other entities. It is a predator and eats frogs and gazelles.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Eagle extends Animal {
 

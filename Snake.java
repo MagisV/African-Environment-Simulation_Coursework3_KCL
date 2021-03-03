@@ -2,6 +2,9 @@ import java.util.List;
 
 /**
  * Class Snake - The snake is an animal that movies on the ground. It is a predator and eats only frogs.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Snake extends Animal {
     // Characteristics shared by all snakes (class variables).

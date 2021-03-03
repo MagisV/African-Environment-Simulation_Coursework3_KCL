@@ -7,8 +7,9 @@ import java.util.Map;
  * A graphical view of the map grid.
  * Its displays the different environments on the map using three different colors. A particular environment can be
  * selected using the buttons on the ControlPanel, and a particular environment on the view will be colored.
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class MapView extends JFrame
 {

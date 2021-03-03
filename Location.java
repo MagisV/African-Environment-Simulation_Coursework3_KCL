@@ -1,7 +1,7 @@
 /**
  * Represent a location in a rectangular grid.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes and Michael Kölling ediby Valentin Magis and Barnabas Szalai
  * @version 2016.02.29
  */
 public class Location

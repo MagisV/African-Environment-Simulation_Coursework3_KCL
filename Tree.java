@@ -2,6 +2,7 @@ import java.util.List;
 
 /**
  * Class Tree - A tree is an entity in the simulation. It does not move and can grow on any field. Trees especially grow in forests.
+ *
  * @author Valentin Magis, Barnabas Szalai
  * @version 2021-03-02
  */

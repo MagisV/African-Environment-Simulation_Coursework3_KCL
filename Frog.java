@@ -5,8 +5,8 @@ import java.util.List;
  * A simple model of a frog.
  * frogs age, move, breed, and die.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Frog extends Animal
 {

@@ -5,9 +5,9 @@ import java.util.Iterator;
 /**
  * A simple model of a Lion.
  * Lions age, move, eat rabbits, and die.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class Lion extends Animal
 {

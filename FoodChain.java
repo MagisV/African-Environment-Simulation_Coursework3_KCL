@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 /**
  * Class FoodChain - This class contains a HashMap representing the food each entity eats.
+ *
+ * @author Valentin Magis, Barnabas Szalai
+ * @version 2021-03-02
  */
 public class FoodChain {
 
